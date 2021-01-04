@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		function showboxes()
+		{
+
+		var i=0;
+		var myinterval=setInterval(function(){
+			var iDiv = document.createElement('div');
+		const result = Math.random().toString(26).substring(2,7);
+		document.getElementsByTagName('body')[0].appendChild(iDiv);
+		document.getElementsByTagName("div")[i].innerHTML=result;
+		document.getElementsByTagName("div")[i].style.backgroundColor ='#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6);
+		document.getElementsByTagName("div")[i].style.height = "50px";
+		i+=1;
+		console.log(i)
+		  }, 1000);
+
+		setTimeout(function(){  clearInterval(myinterval); }, 15000);
+		}
+		showboxes()
+	</script>
+</body>
+</html>
