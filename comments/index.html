@@ -43,20 +43,22 @@
 		console.log(mapValue.entries());
 		RevisionIds.push("abcd")
 		console.log(mapValue.has("kcuu5bblgtlc8jmw1xaaj4"))
-		return;
+		
 		//console.log(mapValue.has(''))
-		for (i=1;i<RevisionIds.length;i++)
+		for (i=0;i<RevisionIds.length;i++)
 			{
 				if(!mapValue.has(RevisionIds[i]))
 				{
-					console.log("true")
+					console.log("false")
+					RevisionIds.splice(i,i+1)
 					//delete RevisionIds[i]
 				}	
 			}
+				console.log("New Array")
+		console.log(RevisionIds)
 			}
 			)
-		console.log("New Array")
-			console.log(RevisionIds)
+	
 		
 	</script>
 </body>
