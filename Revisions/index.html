@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Delete Revision Id</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//'use strict';
+		var RevisiionArray=[]
+		var RevisionIds=[]
+		fetch("https://node.v-comply.com:8834/fetchContent?id=5ff54be9250d990008e13e87&ngsw-bypass=true")
+		.then(response => response.json())
+		.then(
+			json => 
+			{
+			console.log(json)
+			console.log(typeof((json.response.desc)))
+			const data=JSON.parse((json.response.desc))
+			console.log(data)
+			console.log(data.revisions.length)
+			for(let i=0;i<data.revisions.length;i++ )
+			{
+				RevisiionArray[i]=data.revisions[i]. revisionId
+			}
+			console.log(RevisiionArray)
+			for(let i=1;i<data.sections[0].blocks.length;i++)
+			{
+				RevisionIds[i]=data.sections[0].blocks[i].inlines[0].revisionIds[0]
+			}
+
+			console.log(RevisionIds)
+
+			let mapValue=new Map();
+			for(let i=0; i< RevisiionArray.length; i++) {
+				mapValue.set(RevisiionArray[i],1);	
+			}
+		    
+		/*for(let i=0;i<RevisiionArray.length;i++)
+		{
+			mapValue.set(RevisiionArray[i],1)
+		}
+		*/
+		console.log(mapValue.entries());
+		RevisionIds.push("a")
+		RevisionIds.push("b")
+		RevisionIds.push("1i3m9fh2zzfj8sgfzcehpzb")
+		RevisionIds.push("1i3m9fh2zzfj8sgfzcehpzb")
+		RevisionIds.push("e")
+		console.log(RevisionIds)
+		//console.log(mapValue.has("kcuu5bblgtlc8jmw1xaaj4"))
+		//console.log(mapValue.has(''))
+		var l=RevisionIds.length;
+		var indexArray=[]
+		var j=0;
+		for (i=0;i<l;i++)
+			{
+				if(!mapValue.has(RevisionIds[i]))
+				{
+					//console.log("false")
+					/*RevisionIds.splice(i,1)
+					l-=1;
+					i-=1;
+					console.log("when elemnet not found length"+l)
+					console.log("when elemnet not found i "+i)
+					//delete RevisionIds[i]
+					*/
+					indexArray[j]=i
+					j+=1;
+				}	
+			}
+		console.log("New index")
+		console.log(indexArray);
+
+		RevisionIds=RevisionIds.filter(myFunction)
+
+		function myFunction(item, index) {
+			console.log(item)
+			if(indexArray.indexOf(index)==-1)
+				return item
+				//RevisionIds.splice(item,1)
+
+
+			}
+			console.log("New RevisionIds")
+			console.log(RevisionIds)
+
+
+		}
+			)
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

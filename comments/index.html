@@ -1,65 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Delete Revision Id</title>
+	<title>Delete Comment Id</title>
 </head>
 <body>
-	<script type="text/javascript">
-		//'use strict';
-		var RevisiionArray=[]
-		var RevisionIds=[]
-		fetch("https://node.v-comply.com:8834/fetchContent?id=5ff54be9250d990008e13e87&ngsw-bypass=true")
+
+
+<script type="text/javascript">
+		var Comments=[]
+		var CommentsId=[]
+		fetch("https://node.v-comply.com:1338/fetchContent?id=5ff57ea6e260aa000705aff1&ngsw-bypass=true")
 		.then(response => response.json())
-		.then(
-			json => 
-			{
-			console.log(json)
-			console.log(typeof((json.response.desc)))
+		.then(json=>
+		{
 			const data=JSON.parse((json.response.desc))
 			console.log(data)
-			console.log(data.revisions.length)
-			for(let i=0;i<data.revisions.length;i++ )
-			{
-				RevisiionArray[i]=data.revisions[i]. revisionId
-			}
-			console.log(RevisiionArray)
-			for(let i=1;i<data.sections[0].blocks.length;i++)
-			{
-				RevisionIds[i]=data.sections[0].blocks[i].inlines[0].revisionIds[0]
-			}
+			
+		})
+</script>
 
-			console.log(RevisionIds)
-
-			let mapValue=new Map();
-			for(let i=0; i< RevisiionArray.length; i++) {
-				mapValue.set(RevisiionArray[i],1);	
-			}
-		    
-		/*for(let i=0;i<RevisiionArray.length;i++)
-		{
-			mapValue.set(RevisiionArray[i],1)
-		}
-		*/
-		console.log(mapValue.entries());
-		RevisionIds.push("abcd")
-		console.log(mapValue.has("kcuu5bblgtlc8jmw1xaaj4"))
-		
-		//console.log(mapValue.has(''))
-		for (i=0;i<RevisionIds.length;i++)
-			{
-				if(!mapValue.has(RevisionIds[i]))
-				{
-					console.log("false")
-					RevisionIds.splice(i,i+1)
-					//delete RevisionIds[i]
-				}	
-			}
-				console.log("New Array")
-		console.log(RevisionIds)
-			}
-			)
-	
-		
-	</script>
 </body>
 </html>
