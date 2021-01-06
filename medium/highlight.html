@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<p id="content">0123456789</p>
+
+
+<script type="text/javascript">
+	
+	const element = document.getElementById('content');
+const textNode = element.childNodes[0];
+const range = document.createRange();
+range.setStart(textNode, 0);  // Start at first character
+range.setEnd(textNode, 5);    // End at fifth character
+</script>
+
+</body>
+</html>
