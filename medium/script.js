@@ -103,11 +103,8 @@ function publish(cordinators,RangeOfText)
       console.log("comments1 array,Rnage is shown here bt not saved in localstorge")
       console.log(comments1)
       localStorage.setItem("comments", JSON.stringify(comments1));
-
   }
 else{
-
-    
   const comments=[]
    console.log(typeof(cordinators))
    comments.push({"comments":inputval,"poss":cordinators.y,"start":RangeOfText.startOffset,"end":RangeOfText.endOffset})
@@ -119,6 +116,7 @@ else{
 function scroll(param,param1,param2)
 {
   //console.log("Range on scroll"+param1+"typeOf"+typeof(param1))
+ // window.getSelection().removeAllRanges();
   const ele=document.getElementById("MainPara")
   const textNode = ele.childNodes[0];
   console.log(param1)
@@ -126,28 +124,13 @@ function scroll(param,param1,param2)
   console.log(param2)
  console.log(typeof(param2))
  window.scrollTo(0, param);
-
- const range = document.createRange();
+const range = document.createRange();
 range.setStart(textNode, param1);
 range.setEnd(textNode, param2);
+
 const mark = document.createElement('mark');
 range.surroundContents(mark);
-
- 
 }
-
-function markNode() {
-if(document.getSelection() && document.getSelection().toString().length){
-let range = document.getSelection().getRangeAt(0);
-let newNode = document.createElement('mark');
-      newNode.appendChild(range.extractContents());
-      range.insertNode(newNode);
-}
-else{
-alert('please make selection of text to mark');
-}
-}
-
 
 
 function highlight(element,st,en)
