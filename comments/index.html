@@ -7,17 +7,114 @@
 
 
 <script type="text/javascript">
+	'use strict';
 		var Comments=[]
 		var CommentsId=[]
+		//fetch apis
 		fetch("https://node.v-comply.com:1338/fetchContent?id=5ff57ea6e260aa000705aff1&ngsw-bypass=true")
 		.then(response => response.json())
 		.then(json=>
 		{
 			const data=JSON.parse((json.response.desc))
 			console.log(data)
-			
+			for(let i=0;i<data.comments.length;i++)
+			{
+				Comments[i]=data.comments[i].commentId
+			}
+
+			console.log(Comments)
+
+			console.log(data.sections[0].blocks)
+			//console.log(data.sections[0].blocks[0].inlines.length)
+			//console.log(data.sections[0].blocks[0].inlines)
+			for(let i=0;i<data.sections[0].blocks.length;i++)
+			{
+				//console.log(data.sections[0].blocks[i])
+				//console.log(data.sections[0].blocks[i].inlines)
+				for(let j=0;j<data.sections[0].blocks[i].inlines.length;j++)
+				{
+					//console.log(data.sections[0].blocks[i].inlines[j].commentId)
+					if(data.sections[0].blocks[i].inlines[j].commentId!==undefined)
+					{
+						CommentsId.push(data.sections[0].blocks[i].inlines[j].commentId)	
+					}
+				}
+			}
+
+			console.log(CommentsId)
+			//hashMap 
+			let mapValue=new Map();
+
+			for(let i=0; i< Comments.length; i++) {
+				mapValue.set(Comments[i],1);	
+			}
+
+			console.log(mapValue.entries());
+			var l=CommentsId.length;
+			var indexArray=[]
+		
+			//push CommentsId elements in indexArray  if not presnet in Commenst Array
+			for (let i=0;i<l;i++)
+			{
+				if(!mapValue.has(CommentsId[i]))
+				{
+					
+					indexArray.push(i)
+					
+				}	
+			}
+			console.log(indexArray);
+
+
+			//filter on CommentsId array to return only thos whose index in not inside indexArray
+			CommentsId=CommentsId.filter(myFunction)
+
+			function myFunction(item, index) {
+			//console.log(item)
+			if(indexArray.indexOf(index)==-1)
+				return item
+				
+			}
+
+			console.log("New CommentsId")
+			console.log(CommentsId)
+
+			let newMap=new Map();
+
+			for(let i=0; i< CommentsId.length; i++) {
+				newMap.set(CommentsId[i],1);	
+			}
+			console.log(newMap.entries())
+
+			data.sections[0].blocks[0].inlines[0].commentId='a'
+
+			for(let i=0;i<data.sections[0].blocks.length;i++)
+			{
+				for(let j=0;j<data.sections[0].blocks[i].inlines.length;j++) 
+				{
+
+					if(!CommentsId.includes(data.sections[0].blocks[i].inlines[j].commentId))
+				
+				{
+					console.log(data.sections[0].blocks[i].inlines[j].commentId)
+					delete data.sections[0].blocks[i].inlines[j].commentId;
+					//console.log(data.sections[0].blocks[i].inlines[j]);
+				}
+			}
+
+				
+				
+			}
+			for(let i=0;i<data.sections[0].blocks.length;i++)
+			{
+				
+				console.log(data.sections[0].blocks[i].inlines)
+				
+			}
+
+			console.log(data)
+
 		})
 </script>
-
 </body>
 </html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		var obj=[
+		{
+			"a":1,
+			"b":1
+		},
+		{
+			"a":2,
+			"b":2
+		},
+		{
+			"a":3,
+			"b":3
+		},
+		{
+			"a":4,
+			"b":4
+		}
+
+		]
+
+
+		for(let i=0;i<obj.length;i++)
+		{	
+			console.log(obj[i].a)
+
+			if(i%2==0)
+			{
+				delete obj[i].a
+			}
+			console.log(obj[i]);
+		}
+
+		
+
+	</script>
+</body>
+</html>
