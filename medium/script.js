@@ -118,26 +118,93 @@ function scroll(param,param1,param2)
   //console.log("Range on scroll"+param1+"typeOf"+typeof(param1))
  // window.getSelection().removeAllRanges();
   const ele=document.getElementById("MainPara")
+  const MainParaEleArray=document.getElementsByTagName("p")
+  console.log(MainParaEleArray)
   const textNode = ele.childNodes[0];
   console.log(param1)
  console.log(typeof(param))
   console.log(param2)
  console.log(typeof(param2))
  window.scrollTo(0, param);
-const range = document.createRange();
-range.setStart(textNode, param1);
+const range = document.createRange()
+ var MarkElement=document.getElementById('Mark')
+ console.log(MarkElement)
+if (MarkElement==null)
+{
+  const mark = document.createElement('mark');
+  mark.setAttribute("id","Mark")
+  range.setStart(textNode, param1);
+  range.setEnd(textNode, param2);
+  //MainParaEleArray[0].normalize();
+  //console.log(MainParaEleArray)
+  range.surroundContents(mark);
+  console.log(textNode)
+  //clone = range.cloneRange();
+  /*
+  console.log("Mark Found")
+  range.selectNodeContents(mark)
+ //window.getSelection().removeAllRanges();
+  //MarkElement.remove()
+  while(ele.length)
+  {
+    var parent = ele[ 0 ].parentNode;
+    console.log(parent)
+    while( ele[ 0 ].firstChild ) {
+      parent.insertBefore(  ele[ 0 ].firstChild, b[ 0 ] );
+  }
+   parent.removeChild( ele[ 0 ] );
+  }
+  range.setStart(textNode, param1);
 range.setEnd(textNode, param2);
-
-const mark = document.createElement('mark');
+//const mark1 = document.createElement('mark');
 range.surroundContents(mark);
+console.log(range)
+*/
+}
+else{
+  console.log(ele.childNodes)
+  console.log("else")
+  const MainParaEle=document.getElementsByTagName('mark')
+  //console.log(MainParaTextEle)
+
+  while(MainParaEle.length)
+  {
+    //range.selectNodeContents(mark)
+ //window.getSelection().removeAllRanges();
+    var parent = MainParaEle[ 0 ].parentNode;
+   
+    console.log(parent)
+    while( MainParaEle[ 0 ].firstChild ) {
+      parent.insertBefore(  MainParaEle[ 0 ].firstChild, MainParaEle[ 0 ] );
+  }
+   parent.removeChild( MainParaEle[ 0 ] );
+  }
+  
+  MainParaEleArray[0].normalize();
+ //removeAllChildNodes(ele)
+  console.log(ele.childNodes)
+  const mark = document.createElement('mark');
+  mark.setAttribute("id","Mark")
+  console.log(textNode)
+  range.setStart(textNode, param1);
+  range.setEnd(textNode, param2);
+  console.log(MainParaEleArray)
+  
+  console.log(MainParaEleArray)
+  range.surroundContents(mark);
+  console.log(range) 
+}
+
+// reomveAllRanges  will not work because we are not seleceting the document we are getting range
+// from param 1 and param2
+console.log(range)
 }
 
 
-function highlight(element,st,en)
-{
- // alert(st)
-  //document.getElementById('MainPara').style.color='pink'
-
+function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
 }
 
 function ShowComments()

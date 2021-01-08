@@ -96,20 +96,17 @@
 					if(!CommentsId.includes(data.sections[0].blocks[i].inlines[j].commentId))
 				
 				{
-					console.log(data.sections[0].blocks[i].inlines[j].commentId)
+					//console.log(data.sections[0].blocks[i].inlines[j].commentId)
 					delete data.sections[0].blocks[i].inlines[j].commentId;
 					//console.log(data.sections[0].blocks[i].inlines[j]);
 				}
 			}
-
-				
 				
 			}
 			for(let i=0;i<data.sections[0].blocks.length;i++)
 			{
 				
 				console.log(data.sections[0].blocks[i].inlines)
-				
 			}
 
 			console.log(data)

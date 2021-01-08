@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+</head>
+<body>
+    <div>
+        <p>
+        prena bhatra
+        <span>Megha</span>
+        antima
+        </p>
+    </div>
+    <script>
+    let wrapper = document.getElementsByTagName("p");
+//document.wrapper.appendChild( document.createTextNode("text ") );
+//document.wrapper.appendChild( document.createTextNode("text ") );
+console.log(wrapper[0].childNodes)
+// At this point, wrapper.childNodes.length === 2
+// wrapper.childNodes[0].textContent === "Part 1 "
+// wrapper.childNodes[1].textContent === "Part 2 
+wrapper[0].normalize();  
+console.log(wrapper)  
+
+    </script>
+</body>
+</html>

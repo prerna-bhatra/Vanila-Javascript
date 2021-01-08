@@ -8,7 +8,7 @@
 		//'use strict';
 		var RevisiionArray=[]
 		var RevisionIds=[]
-		fetch("https://node.v-comply.com:8834/fetchContent?id=5ff54be9250d990008e13e87&ngsw-bypass=true")
+		fetch("https://node.v-comply.com:1338/fetchContent?id=5ff6ca47ddee9900080a26d7&ngsw-bypass=true")
 		.then(response => response.json())
 		.then(
 			json => 
@@ -23,78 +23,99 @@
 				RevisiionArray[i]=data.revisions[i]. revisionId
 			}
 			console.log(RevisiionArray)
+			data.sections[0].blocks[0].inlines[0].revisionIds=['a','b',"1xivt23qplbzhkjj9v2s5",'c','d']
 			for(let i=1;i<data.sections[0].blocks.length;i++)
 			{
-				RevisionIds[i]=data.sections[0].blocks[i].inlines[0].revisionIds[0]
-			}
-
-			console.log(RevisionIds)
-
-			let mapValue=new Map();
-			for(let i=0; i< RevisiionArray.length; i++) {
-				mapValue.set(RevisiionArray[i],1);	
-			}
-		    
-		/*for(let i=0;i<RevisiionArray.length;i++)
-		{
-			mapValue.set(RevisiionArray[i],1)
-		}
-		*/
-		console.log(mapValue.entries());
-		RevisionIds.push("a")
-		RevisionIds.push("b")
-		RevisionIds.push("1i3m9fh2zzfj8sgfzcehpzb")
-		RevisionIds.push("1i3m9fh2zzfj8sgfzcehpzb")
-		RevisionIds.push("e")
-		console.log(RevisionIds)
-		//console.log(mapValue.has("kcuu5bblgtlc8jmw1xaaj4"))
-		//console.log(mapValue.has(''))
-		var l=RevisionIds.length;
-		var indexArray=[]
-		var j=0;
-		for (i=0;i<l;i++)
-			{
-				if(!mapValue.has(RevisionIds[i]))
+				//console.log(data.sections[0].blocks[i])
+				if(data.sections[0].blocks[i].hasOwnProperty('inlines') && data.sections[0].blocks[i].inlines.length>0 )
 				{
-					//console.log("false")
-					/*RevisionIds.splice(i,1)
-					l-=1;
-					i-=1;
-					console.log("when elemnet not found length"+l)
-					console.log("when elemnet not found i "+i)
-					//delete RevisionIds[i]
-					*/
-					indexArray[j]=i
-					j+=1;
-				}	
-			}
-		console.log("New index")
-		console.log(indexArray);
+					//console.log(i)
+					//console.log(data.sections[0].blocks[i].inlines[0])
+					//if(data.sections[0].blocks[i].inlines[0].hasOwnProperty('revisionIds'))
+					//{
+					//		console.log(data.sections[0].blocks[i].inlines[0].revisionIds)
+					//}
 
-		RevisionIds=RevisionIds.filter(myFunction)
+					//RevisionIds.push(data.sections[0].blocks[i].inlines[0])
+					if(data.sections[0].blocks[i].inlines[0].hasOwnProperty('revisionIds'))
+					{
+						for(let j=0;j<data.sections[0].blocks[i].inlines[0].revisionIds.length;j++)
+						{
+							RevisionIds.push(data.sections[0].blocks[i].inlines[0].revisionIds[j])
+						}
+						//RevisionIds.push(data.sections[0].blocks[i].inlines[0].revisionIds)
+					}
 
-		function myFunction(item, index) {
-			console.log(item)
-			if(indexArray.indexOf(index)==-1)
-				return item
-				//RevisionIds.splice(item,1)
+				}
+				/*if(data.sections[0].blocks[i].inlines[0].hasOwnProperty('revisionIds'))
+				{
+					RevisionIds.push()
+
+				}
+				*/
 			}
-			console.log("New RevisionIds")
+
 			console.log(RevisionIds)
+
+			let RevisionArrayMap=new Map()
+			for(let i=0; i< RevisiionArray.length; i++) {
+				RevisionArrayMap.set(RevisiionArray[i],1);	
+			}
+
+			console.log(RevisionArrayMap.entries())
+				//data.sections[0].blocks[0].inlines[0].revisionIds='a
+
+				console.log("before update")
+				var indexArray=[]
+				console.log(data)
+				for(let i=0;i<data.sections[0].blocks.length;i++)
+			{
+				//console.log(data.sections[0].blocks[i])
+
+				if(data.sections[0].blocks[i].hasOwnProperty('inlines') && data.sections[0].blocks[i].inlines.length>0 )
+				{
+                    
+					if(data.sections[0].blocks[i].inlines[0].hasOwnProperty('revisionIds'))
+					{
+						console.log(data.sections[0].blocks[i].inlines[0].revisionIds)
+						for(let j=0;j<data.sections[0].blocks[i].inlines[0].revisionIds.length;j++)
+						{
+
+							//console.log(data.sections[0].blocks[i].inlines[0].revisionIds[j])
+							if(RevisionArrayMap.has(data.sections[0].blocks[i].inlines[0].revisionIds[j]))
+							{
+								//console.log(data.sections[0].blocks[i].inlines[0].revisionIds[j])
+								//delete data.sections[0].blocks[0].inlines[0].revisionIds
+								indexArray.push(j)
+
+								
+							}
+						}
+						
+					}
+
+				}
+				
+			}
+
+			//using filter to update revisiion id in sections
+
+			
+			
+
+
+			console.log("after update")
+
+			console.log(data)
+
+			console.log("indexArray")
+			console.log(indexArray)
+
+
+			
 		}
+
 			)
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
