@@ -271,5 +271,15 @@ function documentMouseDown(event) {
   popup.remove();
 }
 
+function shareTwitter()
+{
+	 const selectedText = document.getSelection().toString().trim();
+ 	//	alert(selectedText)
+   // documentMouseDown()
+   console.log(selectedText)
+   if (selectedText != "") {
+    window.open('https://twitter.com/intent/tweet?text='+encodeURI(selectedText) + '&url=' + encodeURI(document.URL));
+}
+}
 
 
