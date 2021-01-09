@@ -37,6 +37,7 @@ function showdiv()
 	 const selectedText = document.getSelection().toString().trim();
  	//	alert(selectedText)
    // documentMouseDown()
+   
  	var highlight= document.createElement('div');
   document.body.appendChild(highlight);
 	highlight.setAttribute("id", "Div1");

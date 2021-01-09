@@ -1,5 +1,6 @@
-require('dotenv').config()
+require('dotenv').config()//env file data 
 const express=require('express')
+const cors=require('cors')
 const mongoose=require('mongoose')
 const bodyParser=require('body-parser');
 const mongoURI=require('./config/dev.js')
@@ -16,6 +17,7 @@ const port = process.env.PORT || 5000
 //middlewares
 app.use(bodyParser.json())
 app.use(cookieParser())
+app.use(cors())
 
 //api routes
 app.use('/api',userRoutes);

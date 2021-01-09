@@ -53,7 +53,7 @@ exports.signin=(req,res)=>
 	{
 		if(err || !user)
 		{
-			return res.status(400).json({err:'email not exisits'});
+			return res.status(400).json({err:'email not exist'});
 		}
 		//if user is found the email and password match
 		//ceate atuthetication
