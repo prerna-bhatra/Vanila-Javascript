@@ -10,7 +10,24 @@ const CommentsSchema=new mongoose.Schema({
     {
         type:String,
         required:true
+    },
+    HighlightTextYcordinator:
+    {
+        type:Number,
+        required:true
+    },
+    HighlightTextRangeStartOffest:
+    {
+        type:Number,
+        required:true
+    },
+    HighlightTextRangeEndOffest:
+    {
+        type:Number,
+        required:true
     }
+
+
 },
 {
 	timestamps:true
