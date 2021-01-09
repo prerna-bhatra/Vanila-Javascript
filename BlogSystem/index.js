@@ -4,6 +4,7 @@ const mongoose=require('mongoose')
 const bodyParser=require('body-parser');
 const mongoURI=require('./config/dev.js')
 const userRoutes=require('./routers/User')
+const commentRoutes=require('./routers/Comment')
 const cookieParser = require('cookie-parser')
 const app =express()
 
@@ -18,7 +19,7 @@ app.use(cookieParser())
 
 //api routes
 app.use('/api',userRoutes);
-
+app.use('/api',commentRoutes);
 
 app.listen(port, () => {
   console.log(`Server Running at ${port}`)
