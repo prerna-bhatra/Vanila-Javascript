@@ -97,6 +97,9 @@ p {
   list-style: none;
 }
 
+#MyComments ul{
+  list-style: none;
+}
 @keyframes btnEntrance { /* zoomIn */
   0% {
     opacity: 0;
@@ -119,7 +122,15 @@ p {
     padding: 5px 5px 5px 5px;
     margin: 2px 2px 2px 2px;
     cursor: pointer;
-};
+}
+#MyComments ul li
+{
+   border: 1px solid black;
+    padding: 5px 5px 5px 5px;
+    margin: 2px 2px 2px 2px;
+    cursor: pointer;
+}
+
 
 @media(max-width: 992px) {
   .container { padding: 1.25rem 6rem; }
@@ -142,10 +153,9 @@ p {
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="Blog.html">Home</a></li>
-        <li><a href="MyComments.html">My Comments</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><button id="SignOut"><span class="glyphicon glyphicon-user"></span> Sign Out</button></li>
+        <li><button id="SignOut" class="btn btn-danger"><span class="glyphicon glyphicon-user"></span> Sign Out</button></li>
       </ul>
     </div>
   </nav>
@@ -193,11 +203,18 @@ Getting Started with GAPI
 The beautiful part about GAPI is that you do not need to download any library to use the API client. In an HTML file, simply include this script tag:
    </p>
   </div>
-  All Comments
+  <div>
+    <span><button id="AllComments" class="btn btn-success" onclick="ReadComments()">All Comments</button></span>
+    <span><button  class="btn btn-success" onclick="ShowMyComments()">My Comments</button></span>
+  </div>
   <br/> <br/>
   <div id="ReadCommentsArea">
     <ul id="CommentsList">
     </ul>
+</div>
+<div id="MyComments">
+  <ul id="MyCommentsList"> 
+  </ul>
 </div>
 </div>
 <!--
@@ -224,12 +241,7 @@ The beautiful part about GAPI is that you do not need to download any library to
 <div class="CommentBody"  id="CommentBody">
 </div>
 
-<div id="ReadCommentsArea">
-    <ul id="CommentsList">
-    </ul>
-</div>
-
 <script src="script.js"></script>
-<script src="MyComments.js"></script>
+
 </body>
 </html>
