@@ -190,7 +190,6 @@ else{
   range.setStart(textNode, param1);
   range.setEnd(textNode, param2);
   console.log(MainParaEleArray)
-  
   console.log(MainParaEleArray)
   range.surroundContents(mark);
   console.log(range) 
@@ -246,7 +245,7 @@ function ShowComments()
           document.getElementsByClassName("Comment")[i].addEventListener("click",function() {
             console.log(i)
             scroll(CommentPossiitons[i],CommentRangeStart[i],CommentRangeEnd[i])
-          })
+          },false)
 
       }
            console.log(CommentPossiitons)

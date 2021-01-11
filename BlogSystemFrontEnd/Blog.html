@@ -3,8 +3,11 @@
 <head>
 	<title></title>
 </head>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
 	* {
   padding: 0;
@@ -89,6 +92,10 @@ p {
     height: 800px;
     display: none;
 }
+#ReadCommentsArea  ul
+{
+  list-style: none;
+}
 
 @keyframes btnEntrance { /* zoomIn */
   0% {
@@ -99,6 +106,20 @@ p {
     opacity: 1;
   }    
 }
+#Mark 
+{
+  background-color: chartreuse;
+}
+#MainPara
+{
+  margin-top: 60px;
+}
+#ReadCommentsArea ul li {
+    border: 1px solid black;
+    padding: 5px 5px 5px 5px;
+    margin: 2px 2px 2px 2px;
+    cursor: pointer;
+};
 
 @media(max-width: 992px) {
   .container { padding: 1.25rem 6rem; }
@@ -114,6 +135,20 @@ p {
 }
 </style>
 <body style="background: #ebebeb ; position: relative;">
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="Blog.html">VComply</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="Blog.html">Home</a></li>
+        <li><a href="MyComments.html">My Comments</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><button id="SignOut"><span class="glyphicon glyphicon-user"></span> Sign Out</button></li>
+      </ul>
+    </div>
+  </nav>
 	<div class="container">
   <div class="selectable-text-area">
    <p id="MainPara">
@@ -158,6 +193,12 @@ Getting Started with GAPI
 The beautiful part about GAPI is that you do not need to download any library to use the API client. In an HTML file, simply include this script tag:
    </p>
   </div>
+  All Comments
+  <br/> <br/>
+  <div id="ReadCommentsArea">
+    <ul id="CommentsList">
+    </ul>
+</div>
 </div>
 <!--
     this div will be popped on selecting the text
@@ -175,13 +216,20 @@ The beautiful part about GAPI is that you do not need to download any library to
 -->
 <div id="CommentBoxArea">
     <p id="SelectedText"></p>
-    <input type="text" placeholder="Your Comment">
+    <input type="text" placeholder="Your Comment" id="Comment">
     <br/>
     <button id="PublishBtn">Publish</button>
 
 </div>
 <div class="CommentBody"  id="CommentBody">
 </div>
+
+<div id="ReadCommentsArea">
+    <ul id="CommentsList">
+    </ul>
+</div>
+
 <script src="script.js"></script>
+<script src="MyComments.js"></script>
 </body>
 </html>

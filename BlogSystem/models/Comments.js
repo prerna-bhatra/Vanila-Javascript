@@ -5,7 +5,13 @@ const CommentsSchema=new mongoose.Schema({
 	{
 		type:Object,
 		require:true
-    },
+    }
+    ,
+    UserName:
+    {
+      type:String
+    }
+    ,
     CommentName:
     {
         type:String,
@@ -14,17 +20,17 @@ const CommentsSchema=new mongoose.Schema({
     HighlightTextYcordinator:
     {
         type:Number,
-        required:true
+      //  required:true
     },
     HighlightTextRangeStartOffest:
     {
         type:Number,
-        required:true
+       // required:true
     },
     HighlightTextRangeEndOffest:
     {
         type:Number,
-        required:true
+       // required:true
     }
 
 

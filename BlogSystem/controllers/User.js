@@ -49,14 +49,15 @@ exports.signin=(req,res)=>
 	//find the user on email
 
 	const {email,password}=req.body;
+	console.log(email,password)
 	User.findOne({email},(err,user)=>
 	{
+		console.log(err)
+		console.log(user)
 		if(err || !user)
 		{
 			return res.status(400).json({err:'email not exist'});
 		}
-		//if user is found the email and password match
-		//ceate atuthetication
 			if(!user.authenticate(password))
 			{
 				return res.status(401).json(
@@ -98,7 +99,7 @@ exports.userById=(req,res,next,id)=>
 
 exports.signout=(req,res)=>
 {
-	res.clearCookie('t')
-	res.json({message:"Signput success"});
+	
+	res.json({message:"Signout success"});
 }
 
