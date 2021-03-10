@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         @keyframes anim {
+        0% {
+            transform: scaleY(0);
+        }
+        100% {
+            transform: scaleY(1);
+        }
+            }
+            tr {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            display: none;
+            transform-origin: bottom;
+            }
+            tr.active {
+            display: table-row;
+            animation: anim 0.5s ease-out;
+            }
+            td {
+            padding: 10px;
+            }
+
+    </style>
+</head>
+<body>
+    <table>
+        <tbody>
+          <tr class="active">
+            <td>Row 1</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+          <tr class="active">
+            <td>Row 2</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+          <tr class="active">
+            <td>Row 3</td>
+            <td>...</td>
+            <td>...</td>
+          </tr>
+        </tbody>
+      </table>
+</body>
+</html>
