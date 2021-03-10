@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1, #div2 {
+            margin: 10px 10px 10px 10px;
+            width:350px;
+            height:300px;
+            padding:10px 10px 10px 10px;
+            border:1px solid #aaaaaa;
+         }
+    </style>
+</head>
+<body>
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div id="fir">
+            <!-- <h1>FIRST</h1> -->
+            <img id="drag1" src="https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg" width="336" height="69" draggable="true" ondragstart="drag(event)" />
+        </div>
+    </div>
+    <br>
+    <div id="div2" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div id="sec">
+            <!-- <h1>SECOND</h1> -->
+            <img id="drag2" src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014__340.jpg" width="236" height="49" draggable="true" ondragstart="drag(event)" />
+        </div>
+
+    </div>
+    <script>
+
+        function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("src", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var src = document.getElementById(ev.dataTransfer.getData("src"));
+    var srcParent = src.parentNode;
+    var tgt = ev.currentTarget.firstElementChild;
+
+    ev.currentTarget.replaceChild(src, tgt);
+    srcParent.appendChild(tgt);
+}
+    </script>
+</body>
+</html>

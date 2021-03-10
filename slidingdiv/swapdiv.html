@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1
+        {
+            background-color: blue;
+            width: 500px;
+            height: 200px;
+        }
+        #box2
+        {
+            background-color: lime;
+            width: 500px;
+            height: 200px;
+        }
+        #box3
+        {
+            background-color: mediumorchid;
+            width: 500px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="parent">
+        <div id="box1" class="common" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            Note 1
+            <img id="drag1" src="https://i.ytimg.com/vi/jo8uP-xc6ZU/maxresdefault.jpg" width="336" height="69" />
+        </div>
+        <div id="box2" class="common" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            Note 2
+            <img id="drag2" src="https://assets.change.org/photos/0/gq/rv/MgGqRvVqwKtctOK-128x128-noPad.jpg?1520699462" width="236" height="49"  />
+        </div>
+        <div id="box3" class="common" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+            Note 3
+            <img id="drag2" src="https://pbs.twimg.com/profile_images/1146331293753339904/no4aO6Ld_400x400.jpg" width="236" height="49"  />
+        </div>
+        </div>
+</body>
+<script>
+    let dragindex=0;
+let clone=" ";
+function drag(e)
+{
+e.dataTransfer.setData("text",e.target.id);
+
+}
+function allowDrop(e)
+{
+e.preventDefault();
+}
+
+function drop(e)
+{
+e.preventDefault();
+clone=e.target.cloneNode(true);
+let data=e.dataTransfer.getData("text");
+let nodelist=document.getElementById("parent").childNodes;
+for(let i=0;i<nodelist.length;i++)
+{
+if(nodelist[i].id===data)
+{dragindex=i;}
+}
+document.getElementById("parent").replaceChild(document.getElementById(data),e.target);
+document.getElementById("parent").insertBefore(clone,document.getElementById("parent").childNodes[dragindex]);
+}
+</script>
+</html>
