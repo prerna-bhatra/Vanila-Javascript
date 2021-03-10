@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		#container {
+		  display: inline-block;
+		  cursor: nwse-resize;
+		  border: 1px solid black
+			}
+
+	</style>
+</head>
+<body>
+	 <div id="container">
+      <img  draggable="true" ondragstart="handleDragStart(event)" ondrag="handleDrag(event)" style="margin-left: 40px" src="https://www.tobook.com/photos/7057_108284_just-a-test_Graz.jpg" />
+    </div>
+    <div style="background-color: red; width: 400px">
+    	fhvhbjhbsjh
+    </div>
+<script type="text/javascript">
+	let startX, startY;
+
+		handleDragStart = function(event) {
+		  startX = event.x;
+		  startY = event.y;
+		  console.log("startX",startX,"startY",startY)
+		}
+
+		handleDrag = function(event) {
+		  if (event.clientX > 0 && event.clientY > 0) {
+		  	//clientWidth is numeric value that's why we are usign it to calculate we can not add width in width so we will use clientwidth
+		  	console.log("clienwidht and width",event.target.clientWidth,event.target.style.width)
+		      event.target.style.width = event.target.clientWidth + (event.clientX - startX) + "px";
+		      startX = event.clientX;
+		      
+		      event.target.style.height = event.target.clientHeight + (event.clientY - startY) + "px";
+		      startY = event.clientY;
+		  }
+		}
+</script>
+</body>
+</html>
+
+

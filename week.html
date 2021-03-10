@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min.js" integrity="sha512-90vH1Z83AJY9DmlWa8WkjkV79yfS2n2Oxhsi2dZbIv0nC4E6m5AbH8Nh156kkM7JePmqD6tcZsfad1ueoaovww==" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+let data = [
+  {
+    "date": "2019-10-28",
+    "count": 0
+  },
+  {
+    "date": "2019-10-28",
+    "count": 4
+  },
+  {
+    "date": "2019-10-28",
+    "count": 5
+  },
+  {
+    "date": "2019-10-28",
+    "count": 2
+  },
+  {
+    "date": "2019-11-01",
+    "count": 0
+  },
+  {
+    "date": "2019-11-02",
+    "count": 6
+  },
+  {
+    "date": "2019-11-03",
+    "count": 0
+  },
+  {
+    "date": "2019-11-04",
+    "count": 0
+  },
+  {
+    "date": "2019-11-05",
+    "count": 0
+  },
+  {
+    "date": "2019-11-06",
+    "count": 0
+  },
+  {
+    "date": "2019-11-07",
+    "count": 0
+  },
+  {
+    "date": "2019-11-08",
+    "count": 0
+  },
+  {
+    "date": "2019-11-09",
+    "count": 0
+  },
+   {
+    "date": "2020-09-09",
+    "count": 5
+  }
+];
+data.forEach(d=>{
+  d.dateObj =  moment(d.date);  
+});
+
+function buildData(data, keyName ){
+  let result = []; 
+  _.forEach(data, (val, key)=>{
+  	//key is week ,month or year depend upon method
+    console.log("val",val,"length",val.length)
+  	console.log("key",key)
+    let totalCounts  = val.reduce((acc, curr)=>{
+        return acc + curr.count;
+    }, 0)
+    //console.log("length",val.length)
+    //0 is initial value
+    result.push({[keyName]:key, count:totalCounts})
+  })
+  return result;
+}
+
+
+function groupAndBuild(data, dateMethod , groupKey) {
+  let groupedData = _.groupBy(data, (d)=>{
+    return d.dateObj[dateMethod]()
+  })
+  return buildData(groupedData, groupKey)
+}
+console.log(groupAndBuild(data,'month','month'))
+console.log(groupAndBuild(data,'week','week'))
+console.log(groupAndBuild(data,'year','year'))
+</script>
+</body>
+</html>

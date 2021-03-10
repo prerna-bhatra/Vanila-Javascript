@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        #resizable {
+    border: 1px solid #000000;
+    width: 300px;
+    height: 300px;
+    
+    overflow: visible;
+    position:relative;
+}
+#content {
+    color: white;
+    background: #0071bc;
+    position:absolute;
+    top:0;left:0;bottom:0;right:0;
+
+    overflow:hidden;
+}
+#content img{
+    width:100%;
+    height:100%;
+}
+#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip {
+    width: 10px;
+    height: 10px;
+    background-color: #ffffff;
+    border: 1px solid #000000;
+}
+
+#negrip {
+    top:-6px; right:-6px;
+}
+#segrip {
+    bottom:-6px; right:-6px;
+}
+#nwgrip {
+    top:-6px; left:-6px;
+}
+#swgrip {
+    bottom:-6px; left:-6px;
+}
+#ngrip {
+    top:-6px; 
+    left:50%; margin-left:-6px;
+}
+#egrip {
+    right:-6px; 
+    top:50%; margin-top:-6px;
+}
+#sgrip {
+    bottom:-6px; 
+    left:50%; margin-left:-6px;
+}
+#wgrip {
+    left:-6px; 
+    top:50%; margin-top:-6px;
+}
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+     <div id='resizable'>
+    <div id='content'>
+        <img id="img"src="https://www.google.jo/images/srpr/logo11w.png"></img>
+     </div>
+    <!--Begin Define corners -->
+    <div class="ui-resizable-handle ui-resizable-nw" id="nwgrip"></div>
+    <div class="ui-resizable-handle ui-resizable-ne" id="negrip"></div>
+    <div class="ui-resizable-handle ui-resizable-sw" id="swgrip"></div>
+    <div class="ui-resizable-handle ui-resizable-se" id="segrip"></div>
+    <div class="ui-resizable-handle ui-resizable-n" id="ngrip"></div>
+    <div class="ui-resizable-handle ui-resizable-e" id="egrip"></div>
+    <div class="ui-resizable-handle ui-resizable-s" id="sgrip"></div>
+    <div class="ui-resizable-handle ui-resizable-w" id="wgrip"></div>
+    <!--End Define corners-->
+  </div>
+  
+  <script type="text/javascript">
+       
+    $(function(){
+        //Define your element to resize
+        $('#resizable').resizable({
+          handles: {
+            'ne': '#negrip',
+            'se': '#segrip',
+            'sw': '#swgrip',
+            'nw': '#nwgrip',
+            'n': '#ngrip',
+            'e': '#egrip',
+            's': '#sgrip',
+            'w': '#wgrip'
+          }
+        });
+    });
+ 
+  </script>
+
+</body>
+</html>

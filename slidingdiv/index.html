@@ -1,0 +1,50 @@
+<html>
+<head><title></title>
+
+<script type="text/javascript" language="javascript">
+//<![CDATA[
+
+window.onload=function()
+{
+	document.getElementById("d2").onclick = slideIt;
+    document.getElementById("d4").onclick = slideItRight;
+
+};
+
+function slideIt()
+{
+	var slidingDiv = document.getElementById("d1");
+    console.log("left",slidingDiv.style.left)
+	var stopPosition = 50;
+	
+	if (parseInt(slidingDiv.style.left) < stopPosition )
+	{
+		slidingDiv.style.left = parseInt(slidingDiv.style.left) + 1 + "px";
+		setTimeout(slideIt, 1);
+	}
+}
+function slideItRight()
+{
+
+	var slidingDiv = document.getElementById("d3");
+    console.log("RIGHT",slidingDiv.style.right)
+	var stopPosition = 50;
+	
+	if (parseInt(slidingDiv.style.right) < stopPosition )
+	{
+		slidingDiv.style.right= parseInt(slidingDiv.style.right) + 1 + "px";
+		setTimeout(slideItRight, 1);
+	}
+}
+
+</script>
+</head>
+<body>
+
+<div id="d2">click here to slide the div</div>
+<div id="d4">click here to slide the div from right</div>
+<div id="d1" style="position:absolute; left:-150px; top:30px">horizontally sliding div</div>
+<div id="d3" style="position:absolute; right:-215px; top:30px">horizontally sliding div  from right</div>
+
+</body>
+</html>

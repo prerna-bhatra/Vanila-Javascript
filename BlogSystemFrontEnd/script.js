@@ -1,7 +1,26 @@
 //ShowComments()
 //show signup
 
+
 'use strict';
+CheckLogin()
+let client = new ClientJS();
+function CheckLogin()
+{
+  var UserLogin = localStorage.getItem("user");
+  if(UserLogin!=null){
+    document.getElementById('SIGNOUTBTN').style.display='block'
+    document.getElementById('SIGNUPLOGIN').style.display='none'
+  }
+  else{
+   
+    document.getElementById('SIGNOUTBTN').style.display='none'
+    document.getElementById('SIGNUPLOGIN').style.display='block'
+  }
+
+}
+//global BlogId to save into database
+let BlogId
 // document.getElementById('Login').style.display = 'none';
 const selectableTextArea = document.querySelectorAll(".selectable-text-area");
 const twitterShareBtn = document.querySelector("#twitter-share-btn");
@@ -34,277 +53,291 @@ setTimeout(() => { // In order to avoid some weird behavior...
 }
 
 //show this div when click on comment buttons
-function Togglediv()
-{
-  //	alert(selectedText) 
-  console.log("toggle")
- var x = document.getElementById("CommentBoxArea");
- console.log(x.style)
- console.log(x.style.display)
- if (x.style.display !== "block") {
-    x.style.display = "block";
-    document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-  } else {
-    x.style.display = "none";
-  }
-
-  const selectedText = document.getSelection().toString().trim();
-  var selectedTextData=document.getElementById('SelectedText');
-  selectedTextData.innerHTML=selectedText;
-
-  let pos= document.getSelection().getRangeAt(0).getBoundingClientRect()
-  let RangeOfText=document.getSelection().getRangeAt(0)
-  
-  //publish comment and save into database
-  document.getElementById('PublishBtn').addEventListener('click',
-  function PublishComment()
-  {
-     // alert('comment') 
-    console.log(pos,RangeOfText)
-    var x = document.getElementById("CommentBoxArea");
-    x.style.display = "none";
-    var userData = localStorage.getItem("user");
-    console.log(userData)
-    console.log(typeof(userData))
-    var userDataObj=JSON.parse(userData)
-    console.log(userDataObj)
-    console.log(userDataObj.user._id)
-    var comment=document.getElementById("Comment").value;
-    console.log(comment)
-    const UserId=userDataObj.user._id
-    
-    
-    const data={CommentName:comment,UserName:userDataObj.user.name,HighlightTextYcordinator:pos.y,HighlightTextRangeStartOffest:RangeOfText.startOffset, HighlightTextRangeEndOffest:RangeOfText.endOffset}
-    console.log(data)
-  fetch(`http://localhost:5000/api/comment/${UserId}`, {
-      method: 'POST', // or 'PUT'
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-      })
-      .then(response => response.json())
-      .then(data => {
-      console.log('Success:',  JSON.stringify(data));
-      alert("comment added")
-      })
-      .catch((error) => {
-      console.error('Error:', error);
-      });
-  })
- // PublishComment
-}
 
 //read comments
-function ReadComments()
-{
-  var x=document.getElementById('MyComments')
-  var y=document.getElementById('ReadCommentsArea')
-     x.style.display='none'
-    y.style.display='block'
-  var CommentsArray=[]
-  fetch("http://localhost:5000/api/comments")
-  .then(response => response.json())
-  .then(
-    json=>{
-      console.log(json)
-		CommentsArray=[...json]
-		console.log("copy array")
-		console.log(typeof(json))
-    console.log(CommentsArray)
-    CommentsArray.forEach((element,index) => {
-        console.log(element)
-        document.getElementById('CommentsList').innerHTML+='<li class="Comments">'+element.UserName+'</br>'+element.CommentName+'</li>';
-        });
 
-    // const com=document.getElementsByClassName('Comments')[0];
-    // console.log(com)
-    /*document.querySelectorAll('Comments').forEach(item => {
-      item.addEventListener('click', 
-      function ClickComment() {
-        alert("hhj")
-      })
-    })
-*/
 
-console.log(CommentsArray.length)
-for(let i=0;i<CommentsArray.length;i++)
-{
-  console.log(i)
-  document.getElementsByClassName('Comments')[i].addEventListener('click',
-  function ClickComment()
-  {
-   // alert(i)
-    //alert(CommentsArray[i].HighlightTextYcordinator)
-    const ele=document.getElementById("MainPara")
-    const MainParaEleArray=document.getElementsByTagName("p")
-    console.log(MainParaEleArray)
-    const textNode = ele.childNodes[0];
-    scrollTo(0,(CommentsArray[i].HighlightTextYcordinator))
-    
-    var MarkElement=document.getElementById('Mark')
-    if(MarkElement==null)
-    {
-    const range = document.createRange()
-    const mark = document.createElement('mark');
-    mark.setAttribute("id","Mark")
-   // mark.setAttribute("color","blue")
-    range.setStart(textNode, CommentsArray[i].HighlightTextRangeStartOffest);
-    range.setEnd(textNode, CommentsArray[i].HighlightTextRangeEndOffest);
-    range.surroundContents(mark);
-    }
-    else{
-      const MainParaEle=document.getElementsByTagName('mark')
-      while(MainParaEle.length)
-      {
-        //range.selectNodeContents(mark)
-     //window.getSelection().removeAllRanges();
-        var parent = MainParaEle[ 0 ].parentNode;
-       
-        console.log(parent)
-        while( MainParaEle[ 0 ].firstChild ) {
-          parent.insertBefore(  MainParaEle[ 0 ].firstChild, MainParaEle[ 0 ] );
-      }
-       parent.removeChild( MainParaEle[ 0 ] );
-      }
-      MainParaEleArray[0].normalize();
-      const range = document.createRange()
-    const mark = document.createElement('mark');
-    mark.setAttribute("id","Mark")
-    range.setStart(textNode, CommentsArray[i].HighlightTextRangeStartOffest);
-    range.setEnd(textNode, CommentsArray[i].HighlightTextRangeEndOffest);
-    range.surroundContents(mark);
-    }
-    
-    
 
-  }
-  )
-}
-    }
-  )
+var BlogArray=[
   
-}
+]
 
-function documentMouseDown(event) {
-/* if(event.target.id!=="twitter-share-btn" && getComputedStyle(twitterShareBtn).display==="block") {
-  twitterShareBtn.style.display = "none";
-  twitterShareBtn.classList.remove("btnEntrance");
-  window.getSelection().empty();
-}
-*/
-var popup= document.getElementById("Div1")
-/*var icons= document.getElementById("twitterShareBtn");
-icons.remove();
-*/
-popup.remove();
-}
+var BlogImg=[
 
-function shareTwitter()
-{
-   const selectedText = document.getSelection().toString().trim();
-   //	alert(selectedText)
- // documentMouseDown()
- console.log(selectedText)
- if (selectedText != "") {
-  window.open('https://twitter.com/intent/tweet?text='+encodeURI(selectedText) + '&url=' + encodeURI(document.URL));
-}
-}
+]
 
-//signout
-var signout=document.getElementById('SignOut');
-console.log(signout)
-document.getElementById('SignOut').addEventListener('click',
-function SignOut()
-{
-    console.log("signout")
-    fetch('http://localhost:5000/api/signout')
-    .then(response=>
-        {
-            console.log(response)
-            localStorage.removeItem("user");
-            window.location.href='index.html'
-        }
+FetchAndShowBlogs()
 
-    )
-})
-
-function ShowMyComments()
-{
-    var x=document.getElementById('ReadCommentsArea')
-    var y=document.getElementById('MyComments')
-      x.style.display='none'
-    y.style.display='block'
-    
-    var MyCommentsArray=[]
-    var userData = localStorage.getItem("user");
-    var userDataObj=JSON.parse(userData)
-    var UserId=userDataObj.user._id;
-    fetch(`http://localhost:5000/api/MyComments/${UserId}`)
+function FetchAndShowBlogs()
+ {
+    //show Trending blogs or top 6 blogs having most views
+    fetch(`https://desolate-sierra-34755.herokuapp.com/api/ShowTrendingBlog`)
     .then(response=>response.json())
     .then(json=>
-        {
-            console.log(json,typeof(json))
-            MyCommentsArray=[...json]
-            console.log(MyCommentsArray)
-            MyCommentsArray.forEach((element,index) => {
-                console.log(element)
-         document.getElementById('MyCommentsList').innerHTML+='<li class="Comments">'+'</br>'+element.CommentName+'</li>';
-                });
-                console.log(MyCommentsArray.length)
-for(let i=0;i<MyCommentsArray.length;i++)
-{
-  console.log(i)
-  document.getElementsByClassName('Comments')[i].addEventListener('click',
-  function ClickComment()
-  {
-   // alert(i)
-    //alert(MyCommentsArray[i].HighlightTextYcordinator)
-    
-    const ele=document.getElementById("MainPara")
-    const MainParaEleArray=document.getElementsByTagName("p")
-    console.log(MainParaEleArray)
-    const textNode = ele.childNodes[0];
-    scrollTo(0,(MyCommentsArray[i].HighlightTextYcordinator))
-    
-    var MarkElement=document.getElementById('Mark')
-    if(MarkElement==null)
-    {
-    const range = document.createRange()
-    const mark = document.createElement('mark');
-    mark.setAttribute("id","Mark")
-   // mark.setAttribute("color","blue")
-    range.setStart(textNode, MyCommentsArray[i].HighlightTextRangeStartOffest);
-    range.setEnd(textNode, MyCommentsArray[i].HighlightTextRangeEndOffest);
-    range.surroundContents(mark);
-    }
-    else{
-      const MainParaEle=document.getElementsByTagName('mark')
-      while(MainParaEle.length)
       {
-        //range.selectNodeContents(mark)
-     //window.getSelection().removeAllRanges();
-        var parent = MainParaEle[ 0 ].parentNode;
-       
-        console.log(parent)
-        while( MainParaEle[ 0 ].firstChild ) {
-          parent.insertBefore(  MainParaEle[ 0 ].firstChild, MainParaEle[ 0 ] );
-      }
-       parent.removeChild( MainParaEle[ 0 ] );
-      }
-      MainParaEleArray[0].normalize();
-      const range = document.createRange()
-    const mark = document.createElement('mark');
-    mark.setAttribute("id","Mark")
-    range.setStart(textNode, MyCommentsArray[i].HighlightTextRangeStartOffest);
-    range.setEnd(textNode, MyCommentsArray[i].HighlightTextRangeEndOffest);
-    range.surroundContents(mark);
-    }
-  }
-  )
-}
-    
-        })
-}
+        //console.log(json)
+        let d = document.createDocumentFragment();
+        let TrendingRow=document.createElement('div')
+        TrendingRow.setAttribute("id","TrendingRow")
+        TrendingRow.setAttribute("class","row")
+        json.result.forEach(ShowTrendingBlogs)
+        function ShowTrendingBlogs(item,index)
+        {
+         
+            //console.log(index)
+            let TrendingColumns=document.createElement('div')
+            TrendingColumns.setAttribute("id","TrendingColumns")
+            TrendingColumns.setAttribute("class","col-md-4 TrendingColumns")
+            TrendingRow.appendChild(TrendingColumns)
+            //console.log(TrendingColumns)
+          
+        }    
+        d.appendChild(TrendingRow)
+        document.getElementById('BlogsArea').appendChild(d)
+        
+        json.result.forEach(ShowTrendingBlogs1)
+        function ShowTrendingBlogs1(item,index)
+        {
+          // console.log( document.getElementsByClassName('TrendingColumns')[index])
+          let imgsrc=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${item._id}`
+         // console.log(imgsrc)
+         document.getElementsByClassName('TrendingColumns')[index].innerHTML='<img id="blogimg" src='+imgsrc+'></img><h4>'+item.BlogHeading+'</h4><p>'+item.BlogContent.slice(0,50)+'   ...</p><p style="color:red">Read More</p><p class="HashTagItem">'+item.hashTags+'</p>'
+         // console.log(typeof(item))
+         document.getElementsByClassName('TrendingColumns')[index].addEventListener('click',
+         function ClickOnReadBlog()
+         {
+        //  console.log(item._id)
+          window.location.href=`ReadBlog.html?BlogId=${item._id}`
+         })
+         // console.log(item)
 
+        }
+
+      
+      })
+
+      //show rest of the blogs
+      fetch(`https://desolate-sierra-34755.herokuapp.com/api/ShowNewBlog`)
+      .then(response=>response.json())
+      .then(json=>
+        {
+          //console.log(json)
+          let d1 = document.createDocumentFragment();
+          let NewRow=document.createElement('div')
+          NewRow.setAttribute("id","NewRow")
+          NewRow.setAttribute("class","row")
+          json.result.forEach(ShowNewBlogs)
+          function ShowNewBlogs(item,index)
+          {
+           
+              //console.log(index)
+              let NewColumns=document.createElement('div')
+              NewColumns.setAttribute("id","NewColumns")
+              NewColumns.setAttribute("class","col-md-4 NewColumns")
+              NewRow.appendChild(NewColumns)
+              //console.log(TrendingColumns)
+            
+          }    
+          d1.appendChild(NewRow)
+          document.getElementById('NewBlogsArea').appendChild(d1)
+          
+          json.result.forEach(ShowNewBlogs1)
+          function ShowNewBlogs1(item,index)
+          {
+            // console.log( document.getElementsByClassName('TrendingColumns')[index])
+            let imgsrc=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${item._id}`
+           // console.log(imgsrc)
+           document.getElementsByClassName('NewColumns')[index].innerHTML='<img id="blogimg" src='+imgsrc+'></img><h4>'+item.BlogHeading+'</h4><p>'+item.BlogContent.slice(0,50)+'   ...</p><p style="color:red">Read More</p><p class="HashTagItem">'+item.hashTags+'</p>'
+           // console.log(typeof(item))
+           document.getElementsByClassName('NewColumns')[index].addEventListener('click',
+           function ClickOnReadBlog()
+           {
+          //  console.log(item._id)
+            window.location.href=`ReadBlog.html?BlogId=${item._id}`
+           })
+           // console.log(item)
+  
+          }
+  
+        
+        })
+
+//show rest of the blogs which are not trending and new 
+        fetch(`https://desolate-sierra-34755.herokuapp.com/api/blogs`)
+    .then(response=>response.json())
+    .then(json=>
+      {
+       // console.log(json)
+        let d2 = document.createDocumentFragment();
+        let AllBlogRow=document.createElement('div')
+        AllBlogRow.setAttribute("id","AllBlogRow")
+        AllBlogRow.setAttribute("class","row")
+        json.result.forEach(ShowAllBlogs)
+        function ShowAllBlogs(item,index)
+        {
+         
+            //console.log(index)
+            let AllBlogColumns=document.createElement('div')
+            AllBlogColumns.setAttribute("id","AllBlogColumns")
+            AllBlogColumns.setAttribute("class","col-md-4 AllBlogColumns")
+            AllBlogRow.appendChild(AllBlogColumns)
+            //console.log(TrendingColumns)
+          
+        }    
+        d2.appendChild(AllBlogRow)
+        document.getElementById('RestBlogsArea').appendChild(d2)
+        
+        json.result.forEach(ShowTrendingBlogs1)
+        function ShowTrendingBlogs1(item,index)
+        {
+          // console.log( document.getElementsByClassName('TrendingColumns')[index])
+          let imgsrc=`https://desolate-sierra-34755.herokuapp.com/api/blogs/img/${item._id}`
+         // console.log(imgsrc)
+         document.getElementsByClassName('AllBlogColumns')[index].innerHTML='<img id="blogimg" src='+imgsrc+'></img><h4>'+item.BlogHeading+'</h4><p>'+item.BlogContent.slice(0,50)+'   ...</p><p style="color:red">Read More</p><p class="HashTagItem">'+item.hashTags+'</p>'
+         // console.log(typeof(item))
+         document.getElementsByClassName('AllBlogColumns')[index].addEventListener('click',
+         function ClickOnReadBlog()
+         {
+        //  console.log(item._id)
+          window.location.href=`ReadBlog.html?BlogId=${item._id}`
+         })
+         // console.log(item)
+
+        }
+
+      
+      })
+      
+    
+    }
+
+
+ 
+
+   function debounce(func, wait, immediate) {
+    var timeout;
+      return function executedFunction() {
+        var context = this;
+        var args = arguments;
+            
+        var later = function() {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+        };
+
+        var callNow = immediate && !timeout;
+        
+        clearTimeout(timeout);
+
+        timeout = setTimeout(later, wait);
+        
+        if (callNow) func.apply(context, args);
+    };
+    };
+
+        var searchItem = debounce(function() {
+          //alert("hey")
+          let SearchItems=document.getElementsByClassName('HashTagItem')
+      let SearchValue=document.getElementById('SearchBox').value
+      document.getElementById('WihoutSearch').style.display='none'
+      document.body.style.backgroundColor ='gray'
+      document.getElementById('ShowSpinner').style.display='block'
+
+      const data={hashtag:SearchValue}
+      let hashtagArr=[]
+  
+     
+      fetch(`http://localhost:5000/api/SearchByHashTag`, {
+        method: 'POST', 
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(json => {
+          document.getElementById('HashTagArea').innerHTML=' '
+          console.log(json)
+
+          // hashtagArr=[...json.data]
+         // console.log(hashtagArr)
+           
+          setTimeout(function()
+          { 
+            if(hashtagArr.length==0)
+            {
+              if( document.getElementById('HashTagArea').innerHTML==' ')
+              {
+                document.getElementById('ShowSpinner').style.display='none'
+              document.body.style.backgroundColor ='white'
+              document.getElementById('NoDataImg').style.display='block'
+              }
+              
+              
+            }
+          }, 3000);
+
+       
+
+          
+          hashtagArr.forEach(ShowHashTagsSearch)
+
+          function ShowHashTagsSearch(item,index)
+          {
+            document.body.style.backgroundColor ='white'
+            document.getElementById('ShowSpinner').style.display='none'
+            document.getElementById('NoDataImg').style.display='none'
+              document.getElementById('HashTagArea').innerHTML+='<div class="row"><div class="col-md-4 SerachedDiv" id="SerachedDiv"><h4>'+item.BlogHeading +'</h4><p>'+item.BlogContent.slice(0,100) +'</p></div></div>'
+              document.getElementById('HashTagArea').style.display="block"
+            //  console.log(index)
+          }
+        
+        hashtagArr.forEach(ClickeSearch)
+
+        function ClickeSearch(item,index)
+        {
+          document.getElementsByClassName('SerachedDiv')[index].addEventListener('click',
+            function Clicked()
+            {
+              window.location.href=`ReadBlog.html?BlogId=${item._id}`
+            }
+            )
+        }
+
+    })
+     // console.log(document.getElementById('SearchBox').value)
+    if( document.getElementById('SearchBox').value=='')
+    {
+      document.getElementById('WihoutSearch').style.display='block'
+      document.body.style.backgroundColor ='white'
+      document.getElementById('ShowSpinner').style.display='none'
+      document.getElementById('HashTagArea').style.display='none'
+
+    }
+    }, 500);
+
+   document.getElementById('SearchBox').addEventListener('keyup',searchItem)
+   
+  
+
+ var signout=document.getElementById('SignOut');
+ //console.log(signout)
+ document.getElementById('SignOut').addEventListener('click',
+ function SignOut()
+ {
+  let fingerprint = client.getFingerprint();
+    // console.log("signout")
+     fetch(`https://desolate-sierra-34755.herokuapp.com/api/signout/${fingerprint}` )
+     .then(response=>
+         {
+            // console.log(response)
+             localStorage.removeItem("user");
+            //window.location.href='index.html'
+            if(response.ok==true)
+            {
+              window.location.href='index.html'
+            }
+         }
+ 
+     )
+ })

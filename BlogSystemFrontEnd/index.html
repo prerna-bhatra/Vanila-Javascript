@@ -3,11 +3,9 @@
 <head>
 	<title></title>
 </head>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
+<script src="Client.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style type="text/css">
@@ -33,6 +31,15 @@ h1 {
 h2 {
   font-size: 2rem;
 }
+#RestBlog
+{
+  cursor: pointer;
+  padding: 10px 10px 10px 10px;
+}
+#RestBlog:hover
+{
+  background-color: gray;
+}
 hr {
   margin: 3rem 0;
   border: 0;
@@ -43,9 +50,22 @@ p {
   margin-bottom: 2rem;
   line-height: 1.75rem;
 }
+#twitter-share-btn button
+{
+  color: black;
+  margin-left: 5px;
+}
+#blog3img
+{
+  background-color: black;
+
+  
+}
+
 #twitter-share-btn {
-  width: 5.5rem;
-  height: 2.5rem;
+  padding: 5px 5px 5px 5px;
+  width: 8.5rem;
+  height: 3.5rem;
   font-size: 1.25rem;
   color: white;
   background-color:black;
@@ -63,7 +83,18 @@ p {
 	list-style: none;
 	display: inline-block;
 }
+#ShowSpinner
+{
+  font-size: 50px;
+ margin: 50px 50px 500px 500px;
+ display: none
+}
 
+#selectable-text-area
+{
+  display: none;
+  margin-top:60px ;
+}
 #twitter-share-btn i {
   pointer-events: none;
 }
@@ -94,12 +125,14 @@ p {
     height: 800px;
     display: none;
 }
-
-#Login
+#ReadCommentsArea  ul
 {
-     display: none; 
+  list-style: none;
 }
 
+#MyComments ul{
+  list-style: none;
+}
 @keyframes btnEntrance { /* zoomIn */
   0% {
     opacity: 0;
@@ -108,6 +141,69 @@ p {
   100% {
     opacity: 1;
   }    
+}
+#Mark 
+{
+  background-color: chartreuse;
+}
+#MainPara
+{
+  margin-top: 60px;
+}
+#ReadCommentsArea ul li {
+    border: 1px solid black;
+    padding: 5px 5px 5px 5px;
+    margin: 2px 2px 2px 2px;
+    cursor: pointer;
+}
+#MyComments ul li
+{
+   border: 1px solid black;
+    padding: 5px 5px 5px 5px;
+    margin: 2px 2px 2px 2px;
+    cursor: pointer;
+}
+#BlogsArea
+{
+  margin-top: 60px;
+}
+
+#blogs3  .col-md-12
+{
+  cursor: pointer;
+  margin-bottom: 10px;
+   padding: 10px 10px 10px 10px;
+            
+}
+#blogs3  .col-md-12:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#blogimg
+{
+  width:50%;
+  height: 200px;
+}
+
+#TrendingColumns{
+  cursor: pointer;
+  margin-bottom: 30px;
+  padding: 5px 5px 5px 5px;
+ 
+}
+#TrendingColumns:hover
+{
+  background-color: silver;
+}
+
+#SerachedDiv
+{
+  cursor: pointer;
+
+}
+
+#SerachedDiv:hover
+{
+  background-color: gray;
 }
 
 @media(max-width: 992px) {
@@ -122,50 +218,113 @@ p {
   h2 { font-size: 1.5rem; }
   hr { margin: 1.5rem 0; }
 }
+#SIGNOUTBTN
+{
+  display: none;
+  margin-top: 10px;
+}
+#SIGNOUTBTN li{
+  margin-left: 10px;
+}
+.HashTagItem
+{
+  display: none;
+}
+
+#HashTagArea
+{
+  margin-top: 40px;
+  display: none;
+}
+#NewRow
+{
+  margin-top: 100px;
+}
+#NewColumns
+{
+  cursor: pointer;
+}
+#NewColumns:hover
+{
+  background-color: gray;
+}
+#AllBlogColumns
+{
+  cursor: pointer;
+}
+#AllBlogColumns:hover
+{
+  background-color: gray;
+}
+#NoDataImg
+{
+  display: none;
+  margin-top: 100px;
+  
+}
+
 </style>
 <body style="background: #ebebeb ; position: relative;">
-	<div class="container">
-        <div id="SignUp">
-            SignUp
-            <form method="POST"> 
-                <label>
-                    name
-               <label>
-                <input type="text" name="name" id="name" class="form-control">
-                <br>
-                <label>
-                    Email
-                </label>
-                <input type="email" name="email" id="email"  class="form-control">
-                <br>
-                <label>Password</label>
-                <input type="password" name="password" id="password"  class="form-control">
-                <br>
-                <button type="submit" id="signupsubmit"  class="form-control" >SignUp</button>
-                <br>
-                Already have account?
-                
-                 <button class="login"   id="signClick" >Login</button> 
-            </form>
-        </div>
-
-        <div id="Login">
-            Login
-            <label>
-                Email
-            </label>
-                 <input type="email" name="email" id="emailllogin"  class="form-control">
-                 <br>
-                 <label>Password</label>
-                 <input type="password" name="password" id="passwordlogin"  class="form-control">
-                 <br>
-                 <button  type="submit" id="loginSubmit" >Login</button>
-            <br>
-            not haveing account?
-            <button id="loginClick">Signup</button>
-        </div>        
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html">VComply</a>
+       
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><input id="SearchBox" type="text" class="form-control" placeholder="Search HashTag" ></li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right" id="SIGNOUTBTN">
+        <li><button id="newblog" onclick="window.location.href='NewBlog.html'" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> New</button></li>
+        <li><button id="newblog" onclick="window.location.href='drafts.html'" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Drafts</button></li>
+        <li><button id="newblog" onclick="window.location.href='myblogs.html'" class="btn btn-success"><span class="glyphicon glyphicon-blog"></span> My Blogs</button></li>
+        <li><button id="SignOut" class="btn btn-danger"><span class="glyphicon glyphicon-user"></span> Sign Out</button></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="SIGNUPLOGIN">
+        <li><button id="SIGNUP" onclick="window.location.href='login.html'" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Sign Up</button></li>
+        <li><button id="SIGNIN" onclick="window.location.href='login.html'" class="btn btn-primary"><span class="glyphicon glyphicon-user"></span> Sign In</button></li>
+      </ul>
     </div>
+  </nav>
+ <!-- <img  src=""  id="blogimg"> -->
+ <div id="WihoutSearch">
+  <div class="container" id="BlogsArea">
+    <h1><i class="fa fa-line-chart"></i> &nbsp;&nbsp;Trending now</h1>
+    <!--top 6 mostly viewed willl be shown here -->
+    <!-- Rest of the blogs-->
+  </div>
+  <div class="container" id="NewBlogsArea">
+    <h1><i class="fa fa-task"></i> &nbsp;&nbsp;what's new</h1>
+    <!--top 6 mostly viewed willl be shown here -->
+    <!-- Rest of the blogs-->
+  </div>
+  <div class="container" id="RestBlogsArea">
+    <h1><i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;&nbsp;All Blogs</h1>
+    <!--top 6 mostly viewed willl be shown here -->
+    <!-- Rest of the blogs-->
+  </div>
+</div>
+
+ 
+  <div id="ShowSpinner">
+    
+    
+    <i class="fa fa-spinner" aria-hidden="true"></i>
+  </div>
+  <div id="NoDataImg"> 
+    <h1 class="text text-danger">Sorry, no results found!</h1>
+    <img width="500px"  src="images\undraw_empty_xct9.svg">
+  </div>
   
-<script src="login.js"></script>
+  </div>
+
+   <div class="container" id="HashTagArea">
+      <h1>Searched Items</h1>
+  </div>
+ 
+<script src="script.js"></script>
+
 </body>
 </html>

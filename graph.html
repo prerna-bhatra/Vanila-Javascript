@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+	<div id="yo"></div>
+
+	<script type="text/javascript">
+		google.charts.load('44', {
+  callback: drawBackgroundColor,
+  packages: ['corechart']
+});
+
+function drawBackgroundColor() {
+  var c = [
+    [new Date('3/16/2016'), 3],
+    [new Date('3/17/2016'), 5],
+    [new Date('3/18/2016'), 7],
+    [new Date('3/19/2016'), 9],
+  ];
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('date', 'Date');
+  data.addColumn('number', 'Distance');
+
+  data.addRows(c);
+
+  var options = {
+    hAxis: {
+      title: 'Time'
+    },
+    vAxis: {
+      title: 'Popularity'
+    },
+    backgroundColor: '#f1f8e9'
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('yo'));
+  chart.draw(data, options);
+}
+	</script>
+</body>
+</html>

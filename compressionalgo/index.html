@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+<script type="text/javascript">
+	my_lzma = new LZMA("./lzma_worker.js");
+my_lzma.compress("This is my compression test.", 1, function on_compress_complete(result) {
+    console.log("Compressed: " + result);
+    my_lzma.decompress(result, function on_decompress_complete(result) {
+        console.log("Decompressed: " + result);
+    }, function on_decompress_progress_update(percent) {
+        console.log("Decompressing: " + (percent * 100) + "%");
+    });
+}, function on_compress_progress_update(percent) {
+    console.log("Compressing: " + (percent * 100) + "%");
+});
+</script>
+</body>
+</html>
