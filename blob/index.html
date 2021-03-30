@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+   <form>
+   	<input type="file" name="file" id="blobfile"  onchange="showwfile()">
+   </form>
+
+   <script type="text/javascript">
+   	  function showwfile(event)
+   	  {
+   	  		console.log("FILE",this.event.target.files[0]);
+   	  	      const fReader = new FileReader();
+   	  	      const file=this.event.target.files[0];
+              fReader.readAsDataURL(file);
+                fReader.onloadend =  (event) => {
+			      console.log("onload",event.currentTarget)
+			      let image = {
+			        url: event.currentTarget.result,
+			        file
+			      };
+
+			      const b64=btoa(image);
+			      console.log("IMG FILE",b64)
+			      const byteCharacters = atob(b64);
+					const byteNumbers = new Array(byteCharacters.length);
+					for (let i = 0; i < byteCharacters.length; i++) {
+					  byteNumbers[i] = byteCharacters.charCodeAt(i);
+					}
+					const byteArray = new Uint8Array(byteNumbers);
+					const blob = new Blob([byteArray], {type: 'image/png'});
+					const blourl=URL.createObjectURL(blob);
+					console.log("BLOB",blourl)
+			    };
+
+   	
+    }
+   </script>
+</body>
+</html>

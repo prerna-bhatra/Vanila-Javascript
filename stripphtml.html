@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	const originalString = `
+  <div>
+    <p>Hey that's <span>somthing</span></p>
+  </div>
+`;
+
+const strippedString = originalString.replace(/(<([^>]+)>)/gi, "");
+
+console.log(strippedString);
+
+</script>
+</body>
+</html>
+<!--  -->
+ if (!this.toolbarConfig.superscript) {
+
+      const sup = document.createElement('sup');
+      sup.innerHTML = '&#8204;'
+      const range = this.sel.getRangeAt(0);
+      sup.textContent=window.getSelection().toString();
+      range.deleteContents();
+      range.insertNode(sup);
+      range.setStart(sup, 1);
+      range.setEnd(sup, 1);
+      range.collapse();
+      // sup.innerHTML=window.getSelection().toString()
+
+    } else {
+      this.reachTextNode('sup');
+    }
+  }

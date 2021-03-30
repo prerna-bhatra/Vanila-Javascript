@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<img width="200px" id="image" src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZGF3bnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80">
+<img width="200px" id="image" src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZGF3bnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80">
+<button onclick="adddiv()">ADD PARENT</button>
+<script>
+function adddiv()
+{
+    console.log("HEY ADD ")
+    var element=document.getElementById('image')
+    element.style.border=10+'px solid blue'
+    var parent=element.parentNode;
+    var wrapper = document.createElement('div');
+    parent.replaceChild(wrapper, element);
+    wrapper.appendChild(element);
+}
+</script>
+</body>
+</html>
+
+
+<!-- const rexsrc = /src=".*?"/g; // match all a href
+const id = (() => {
+  return '_' + Math.random().toString(36).substr(2, 9);
+})();
+pastedHtml = pastedHtml.replace(rexsrc, (match: any) => {
+  const str = `id="image"+${id}`;
+  return match + str;
+});
+
+const imgRex = /<img.*?src="(.*?)"[^>]+>/g;
+  pastedHtml = pastedHtml.replace(imgRex, (match: any) => {
+    console.log(match);
+    return `<div class="image-container" contenteditable="true" id="image-container"+${id}>` + match + `</div>`;
+  }); -->

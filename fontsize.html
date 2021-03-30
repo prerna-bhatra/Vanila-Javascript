@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<input type="button" onclick="changeFont()" value="Change font">
+    <div contenteditable="true">Hello, this is some editable text</div>
+<script type="text/javascript">
+	function changeFont() {
+    document.execCommand("fontSize", false, "7");
+    var fontElements = window.getSelection().anchorNode.parentNode
+    fontElements.removeAttribute("size");
+    fontElements.style.fontSize = "30px";
+}
+</script>
+</body>
+</html>

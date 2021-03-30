@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+			#navigation {
+			  position: fixed;
+			  top: 0;
+			  left: 250px;
+			}
+
+			#sections {
+			  position: absolute;
+			  top: 0;
+			  left: 400px;
+			}
+
+			.section {
+			  height: 300px;
+			  margin: 10px;
+			  padding: 10px;
+			  border: 1px dashed black;
+			  transition: 0.3s;
+			}
+
+			#section5 {
+			  height: 1000px;
+			}
+
+			.active {
+				color: red;
+			  background: red;
+			}
+	</style>
+</head>
+<body>
+<div id="navigation">
+  <p id="msg">
+  </p>
+  <ul>
+    <li class="section1">Section 1</li>
+    <li class="section2">Section 2</li>
+    <li id="section3">Section 3</li>
+  </ul>
+</div>
+<div id="sections">
+  <div data-id="section1" class="section">
+    I'm section 1
+  </div>
+  <div data-id="section2" class="section">
+    I'm section 2
+  </div>
+  <div data-id="section3" class="section">
+    I'm section 3
+  </div>
+
+</div>
+<script type="text/javascript">
+	window.onscroll = function() {
+  var section = document.getElementsByClassName("section");
+  var bScroll = document.documentElement.scrollTop;
+  for (var i = 0; i < section.length; i++) {
+  	console.log("VALUE",i)
+    var sHeight = section[i].offsetHeight;
+    var offsets = section[i].offsetTop;
+    console.log(bScroll,offsets,sHeight)
+    if (bScroll > offsets && bScroll < offsets + sHeight) {
+    	console.log("HELLO")
+      section[i].className = "section active";
+    } else {
+    	console.log("BYE")
+      section[i].className = "section";
+    }
+
+  }
+
+}
+
+</script>
+</body>
+</html>
