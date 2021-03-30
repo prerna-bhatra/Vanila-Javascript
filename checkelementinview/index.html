@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    .<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+<div id="find-me"  style="height: 300px; width: 200px;;background-color: brown;margin-left: 1500px;">Find me!</div>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+.<br>.<br>.<br>.<br>.<br>.<br>.<br>.<br>
+<script>
+            var isInViewport = function (elem) {
+                var distance = elem.getBoundingClientRect();
+                return (
+                    distance.top >= 0 &&
+                    distance.left >= 0 &&
+                    distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            };
+            var findMe = document.querySelector('#find-me');
+            window.addEventListener('scroll', function (event) {
+                if (isInViewport(findMe)) {
+                    console.log('In viewport!');
+                } else {
+                console.log('Nope...');
+            }
+            }, false);
+</script>
+</body>
+</html>
