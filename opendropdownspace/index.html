@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <div id="optionscontainer">
+
+    </div>
+    <body>
+        <script>
+                                var contacts = [
+                    "John",
+                    "John",
+                    "John",
+                    "John",
+                    "John",
+                    "John",
+                    "John",
+                    ];
+
+                    function phone() {
+                    var menuHtml = '<span class="dropdown"><a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Phone <span class="caret"></span></a><ul class="dropdown-menu">';
+                    for (i = 0; i < contacts.length; i++) {
+                        menuHtml += '<li><a onclick="call(' + i + ')" href="#">' + contacts[i] + '</a></li>';
+                    }
+                    menuHtml += '</ul></span>';
+                    document.getElementById("optionscontainer").innerHTML = menuHtml;
+                    }
+
+                    phone();
+        </script>
+    </body>
+</html>
